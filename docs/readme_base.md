@@ -164,4 +164,4 @@ herramientas/    Script que genera este README
 - Solo funciona en consola y en español.
 
 ## Video de demostración
-_(Enlace pendiente)_
+El video está incluido en el proyecto: `docs/video/video_demostracion.mp4` (MP4, 5:14). Muestra los tres finales, cómo una condición cambia las opciones, la segunda historia con el mismo motor, el error de un destino inexistente, la ejecución de las pruebas, el deshacer de la solicitud de cambio y una explicación de la arquitectura y del impacto del cambio.

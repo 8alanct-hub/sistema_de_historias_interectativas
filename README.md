@@ -64,6 +64,7 @@ Siempre desde la carpeta descomprimida del proyecto y con el entorno virtual act
 | Jugar "La última transmisión" | `python src/main.py` |
 | Jugar la segunda historia ("El último algoritmo") | `python src/main.py data/segunda_historia.json` |
 | Cargar cualquier otra historia | `python src/main.py ruta/al/archivo.json` |
+| Ver el mensaje de un archivo con errores (destino inexistente) | `python src/main.py data/error_destino_inexistente.json` |
 | Ejecutar las pruebas | `python -m pytest -v` |
 | Guardar el registro de las pruebas (PowerShell) | `python -m pytest -v \| Out-File -Encoding utf8 docs/resultado_pruebas.txt` |
 
@@ -146,7 +147,7 @@ src/
   motor.py       Partida: reglas del juego y deshacer
   modelo.py      Historia, Escena, EscenaIntermedia, EscenaFinal y Opcion
   cargador.py    Lectura y validación del JSON
-data/            Historias (JSON)
+data/            Historias (JSON) y un ejemplo con error (error_destino_inexistente.json)
 test/            Pruebas automatizadas (pytest)
 docs/            Documentación, diagramas, capturas y registro de pruebas
 herramientas/    Script que genera este README
@@ -163,7 +164,7 @@ herramientas/    Script que genera este README
 - Solo funciona en consola y en español.
 
 ## Video de demostración
-_(Enlace pendiente)_
+El video está incluido en el proyecto: `docs/video/video_demostracion.mp4` (MP4, 5:14). Muestra los tres finales, cómo una condición cambia las opciones, la segunda historia con el mismo motor, el error de un destino inexistente, la ejecución de las pruebas, el deshacer de la solicitud de cambio y una explicación de la arquitectura y del impacto del cambio.
 
 
 ---
@@ -492,7 +493,7 @@ Llegar a un final (RF09) e informar un bloqueo (RF13) no son casos de uso que el
 <summary><b>7. Implementación</b></summary>
 
 ### Decisión de diseño detallado
-> **Borrador:** decisión tomada durante el modelado de clases. Se confirmará o ajustará cuando se implementen el cargador y el motor.
+Decisión tomada durante el modelado de clases y confirmada en la implementación (`modelo.py` y `cargador.py`).
 
 **Decisión:** separar la escena en dos clases, `EscenaIntermedia` y `EscenaFinal`, que heredan de una clase general `Escena` (id y texto).
 
@@ -608,6 +609,47 @@ Cada requisito se relaciona con su origen, los modelos donde aparece, el código
 | RNF02 Facilidad de uso (interfaz en español) | Voces del cliente; supuesto 2 | Componentes (capa de interfaz) | `main.py` (todos los textos) | Revisión de los textos de la interfaz en el recorrido de los tres finales, una entrada inválida y un error de carga (ver "Verificación de los RNF") |
 | RNF03 Confiabilidad | Voz de la coordinadora | Secuencia; estados | `motor.py` → `elegir_por_numero()`; `main.py` → `main()` (captura de Ctrl + C y errores inesperados) | `test_u3_entrada_invalida_por_numero_deja_el_estado_intacto` (7 variantes); `test_u3_cero_sin_retroceso_disponible_es_invalido`; prueba manual en consola |
 
+### Verificación de los RNF
+RNF01 se verifica con las pruebas automatizadas `test_u4_*` (ver `docs/resultado_pruebas.txt`). RNF02 y RNF03 requieren además una revisión en la consola, que se registra a continuación.
+
+**Cómo se hizo:** se ejecutó `python src/main.py` con la historia principal y se recorrieron los tres finales. En el camino se escribieron entradas inválidas, se usó la opción de deshacer y se cargaron archivos con errores.
+
+#### RNF02: textos de la interfaz en español
+| Texto mostrado por el motor | Cuándo aparece | ¿En español? |
+|---|---|---|
+| `=== La última transmisión ===` (título de la historia) | En cada escena | Sí |
+| `1. Investigar archivo`, `2. Cortar comunicación`… (opciones numeradas) | En cada escena no final | Sí |
+| `0. Deshacer la última decisión` | Cuando hay una decisión que deshacer | Sí |
+| `Elige una opción:` | Al pedir una entrada | Sí |
+| `Entrada no válida. Escribe el número de una de las opciones.` | Ante una entrada inválida | Sí |
+| `*** FIN DE LA HISTORIA ***` | Al llegar a un final | Sí |
+| `1. Comenzar una nueva partida` | Después de un final o un bloqueo | Sí |
+| `No hay opciones disponibles en esta escena; la historia no puede continuar.` | En una escena sin opciones habilitadas | Sí |
+| `No se pudo cargar la historia.` seguido de la causa (por ejemplo: `La opción 'O1' de la escena 'E1' lleva a la escena 'E99', que no existe.`) | Al cargar un archivo con errores | Sí |
+| `No se encontró el archivo 'data/no_existe.json'.` | Al cargar un archivo que no existe | Sí |
+| `Partida terminada. ¡Hasta pronto!` | Al cerrar con Ctrl + C | Sí |
+| `Ocurrió un error inesperado y la partida no puede continuar.` | Ante un error no previsto | Sí |
+
+**Resultado:** 12 de 12 textos en español (100 %). No se muestran trazas técnicas de Python en ningún caso.
+
+#### RNF03: entradas inválidas en la consola
+| Entrada | Escena | Resultado esperado | Resultado obtenido |
+|---|---|---|---|
+| `abc` (texto) | E1 | Aviso; la escena y las variables no cambian | Cumple |
+| Vacía (solo Enter) | E1 | Aviso; sin cambios | Cumple |
+| `9` (fuera de rango) | E1 | Aviso; sin cambios | Cumple |
+| `-1` (negativo) | E1 | Aviso; sin cambios | Cumple |
+| `1.5` (decimal) | E1 | Aviso; sin cambios | Cumple |
+| `0` sin decisión que deshacer | E1 | Aviso; sin cambios | Cumple |
+| `x` después de deshacer | E3 | Aviso; sin cambios | Cumple |
+| Ctrl + C | Cualquiera | Despedida, sin traza de error | Cumple |
+
+Una opción no habilitada no se muestra con número, así que escribir su posición equivale a un número fuera de rango; ese caso se cubre con `9`.
+
+**Resultado:** 0 cierres inesperados. El programa solo termina cuando el lector lo cierra (código de salida 0) o cuando el archivo de historia tiene errores (código de salida 1, con el mensaje correspondiente).
+
+**Evidencia:** captura de la consola en `docs/images/verificacion_consola.png`.
+
 </details>
 
 
@@ -621,7 +663,7 @@ El autor dirigió el trabajo: tomó las decisiones, propuso ideas y revisó y ve
 | Tarea | Aporte del autor | Archivos | Commits |
 |---|---|---|---|
 | Organización y versionado | Creó el repositorio, el tablero Kanban con sus issues y responsables y las capturas del tablero. Hizo todos los commits y creó los tags `v1.0` y `v2.0`. | `docs/images/`, `docs/03_agilidad.md` | `f19bd2e` y siguientes |
-| Segunda historia | Idea y trama propias de "El último algoritmo"; cambio del protagonista a Darío y nueva redacción del final S3. | `data/segunda_historia.json` | `2517695` |
+| Segunda historia | Idea y trama propias de "El último algoritmo"; cambio de los nombres de los protagonistas a Dario y SASHA y nueva redacción del final S3. | `data/segunda_historia.json` | `2517695` |
 | Fundamentos | Riesgos, priorización de los atributos de calidad, decisión sobre los datos del lector y uso del término "motor". | `docs/01_fundamentos.md` | `9d88603` |
 | Proceso y agilidad | Elección de Kanban, definición de terminado y aprendizaje. Corrigió el registro de aprendizajes. | `docs/02_proceso.md`, `docs/03_agilidad.md` | `f60607f` |
 | Requisitos | Planteó los RF, eligió los atributos de los RNF y propuso el supuesto 3 (entrada numérica) con su justificación. | `docs/04_requisitos.md` | `10cc46b`, `1e5ad14`, `050daff` |
