@@ -1,0 +1,26 @@
+5a43ea9 | AlanCT | 2026-10-15 09:57:55 -0500 |  (HEAD -> main, origin/main, origin/HEAD) Anexo + Update Fuentes
+38cb4e7 | AlanCT | 2026-10-15 09:41:06 -0500 |  readme regen
+63d014f | AlanCT | 2026-10-15 09:38:22 -0500 |  video + Update fuentes
+d442a43 | AlanCT | 2026-10-15 08:24:01 -0500 |  fix
+187766c | AlanCT | 2026-10-15 08:08:14 -0500 |  commit
+682a1f6 | AlanCT | 2026-10-15 07:44:52 -0500 |  Declaracion de aportes, entorno virtual en el README + Update fuentes
+bfee105 | AlanCT | 2026-10-15 07:17:47 -0500 |  commit variado + Update fuentes
+0d0b49c | AlanCT | 2026-10-15 06:57:54 -0500 |  matriz de trazabilidad + Update fuentes
+8a79d73 | AlanCT | 2026-10-15 06:47:34 -0500 |  README completo con instalación desde ZIP y documentación desplegable
+df5f560 | AlanCT | 2026-10-15 06:28:12 -0500 |  Decisión de implementación del cambio y alternativa considerada
+6ce430d | AlanCT | 2026-10-15 06:18:14 -0500 |  (tag: v2.0) Solicitud de cambio: deshacer la última decisión (RF14-RF18), U6 y análisis de impacto
+50bc184 | AlanCT | 2026-10-15 05:54:40 -0500 |  (tag: v1.0) Pruebas automatizadas, registro de ejecuon y rutas de capturas + Update fuentes
+2ca8d24 | AlanCT | 2026-10-15 05:37:30 -0500 |  Bibliotecas y licencias + Update fuentes
+50ec29b | AlanCT | 2026-10-15 05:36:37 -0500 |  Cargador con validacion, motor e interfaz de consola con limpieza de consola
+ec21577 | AlanCT | 2026-10-15 05:16:23 -0500 |  modelo + Update fuentes
+a7f4ca9 | AlanCT | 2026-10-15 05:04:48 -0500 |  Modelado, Arquitectura y esctructura del src + Update fuentes
+a26d9bb | AlanCT | 2026-10-15 04:41:24 -0500 |  Diagramas de Modelado + Update fuentes
+f60607f | AlanCT | 2026-10-15 03:03:20 -0500 |  Proceso y agilidad + Update fuentes
+050daff | AlanCT | 2026-10-15 02:37:44 -0500 |  RF y RNF Completos + Update fuentes
+9d88603 | AlanCT | 2026-10-15 02:06:02 -0500 |  Fundamentos completos + Update fuentes
+1e5ad14 | AlanCT | 2026-10-15 01:10:32 -0500 |  RNF + Update fuentes
+10cc46b | AlanCT | 2026-10-15 00:46:21 -0500 |  RF + Update fuentes
+2517695 | AlanCT | 2026-10-15 00:02:46 -0500 |  Historias JSON
+7bb138f | AlanCT | 2026-10-14 23:58:51 -0500 |  Estructura de documentacion, necesidades del cliente y registro de fuentes
+f19bd2e | AlanCT | 2026-10-14 23:27:10 -0500 |  Estructura Inicial del proyecto
+55263e5 | Alan | 2026-10-14 22:54:20 -0500 |  Initial commit
