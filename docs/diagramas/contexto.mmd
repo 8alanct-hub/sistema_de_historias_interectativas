@@ -1,0 +1,14 @@
+
+flowchart LR
+    L[" Lector"]
+    E[" Escritora principal"]
+    D[" Diseñador de la experiencia"]
+    J[("Archivos de historia<br/>(JSON)")]
+    M["Motor de historias<br/>interactivas"]
+
+    E -- "escenas, opciones" --> J
+    D -- "condiciones y efectos" --> J
+    J -- "historia a cargar" --> M
+    M -- "mensajes de error de carga<br/>(causa y campo/ID)" --> E
+    L -- "elección<br/>(número de opción)" --> M
+    M -- "escena, opciones habilitadas,<br/>avisos y final" --> L

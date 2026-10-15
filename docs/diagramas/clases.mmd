@@ -1,0 +1,52 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+    direction LR
+
+    class Historia {
+        +str titulo
+        +str inicio
+        +dict variables_iniciales
+    }
+
+    class Escena {
+        <<abstract>>
+        +str id
+        +str texto
+    }
+
+    class EscenaIntermedia {
+    }
+
+    class EscenaFinal {
+    }
+
+    class Opcion {
+        +str id
+        +str texto
+        +str destino
+        +dict condiciones
+        +dict efectos
+        +esta_habilitada(variables) bool
+    }
+
+    class Partida {
+        +Escena escena_actual
+        +dict variables
+        +opciones_disponibles() list
+        +elegir_por_numero(entrada) bool
+        +elegir_opcion(id_opcion) bool
+        +en_escena_final() bool
+        +sin_opciones_disponibles() bool
+        +reiniciar()
+    }
+
+    Historia "1" *-- "1..*" Escena : contiene
+    Escena <|-- EscenaIntermedia
+    Escena <|-- EscenaFinal
+    EscenaIntermedia "1" *-- "1..*" Opcion : ofrece
+    Opcion "*" --> "1" Escena : destino
+    Partida "*" --> "1" Historia : juega
+    Partida "*" --> "1" Escena : escena actual

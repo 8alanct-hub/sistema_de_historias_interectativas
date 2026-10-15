@@ -1,0 +1,36 @@
+sequenceDiagram
+    actor L as Lector
+    participant I as Interfaz (main.py)
+    participant P as Partida
+    participant O as Opcion
+
+    I->>P: opciones_disponibles()
+    loop cada opción de la escena actual
+        P->>O: esta_habilitada(variables)
+        O-->>P: verdadero / falso
+    end
+    P-->>I: opciones habilitadas
+    I->>L: muestra la escena y las opciones numeradas
+    L->>I: escribe su elección
+    I->>P: elegir_por_numero(entrada)
+
+    alt entrada no es un número o está fuera de rango
+        P-->>I: falso
+        I->>L: aviso: entrada no válida (la partida no cambia)
+    else entrada válida
+        P->>P: elegir_opcion(id_opcion)
+        P->>O: esta_habilitada(variables)
+        O-->>P: verdadero
+        Note over P: Si la opción no existe o no está habilitada,<br/>devuelve falso sin cambiar la partida (CA02)
+        P->>P: aplica los efectos y cambia a la escena destino
+        P-->>I: verdadero
+        I->>P: en_escena_final()
+        I->>P: sin_opciones_disponibles()
+        alt escena final
+            I->>L: muestra el final y ofrece una nueva partida
+        else sin opciones disponibles (bloqueo)
+            I->>L: avisa del bloqueo y ofrece una nueva partida
+        else partida continúa
+            I->>L: muestra la nueva escena y sus opciones
+        end
+    end

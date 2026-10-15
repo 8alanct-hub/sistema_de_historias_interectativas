@@ -1,0 +1,16 @@
+---
+config:
+  layout: elk
+---
+stateDiagram-v2
+    direction TB
+    state "En curso" as EnCurso
+    state "En escena final" as EnEscenaFinal
+    state "Sin opciones disponibles" as SinOpciones
+
+    [*] --> EnCurso : se crea la partida
+    EnCurso --> EnCurso : entrada inválida (sin cambios) o elección hacia escena intermedia
+    EnCurso --> EnEscenaFinal : elección hacia escena final
+    EnCurso --> SinOpciones : elección hacia escena sin opciones habilitadas
+    EnEscenaFinal --> EnCurso : reiniciar()
+    SinOpciones --> EnCurso : reiniciar()

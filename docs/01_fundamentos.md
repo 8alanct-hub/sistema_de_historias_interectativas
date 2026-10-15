@@ -13,7 +13,7 @@ La solución es un motor que interpreta historias escritas en archivos JSON, val
 ## Actores e interesados
 | Actor | Rol |
 |---|---|
-| Usuario final (lector) | Juega la historia: lee las escenas, elige opciones, llega a un final y puede comenzar otra partida. |
+| Lector | Juega la historia: lee las escenas, elige opciones, llega a un final y puede comenzar otra partida. |
 | Escritora principal | Crea y modifica las historias editando los archivos JSON; no programa. |
 | Diseñador de la experiencia | Define las condiciones y consecuencias de las decisiones dentro de las historias. |
 | Coordinadora del festival | Necesita saber qué corregir cuando una historia tiene errores y que el lector nunca vea un cierre inesperado. |

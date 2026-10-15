@@ -1,0 +1,25 @@
+---
+config:
+  layout: elk
+---
+flowchart LR
+    L["Lector"]
+    E["Escritora principal"]
+
+    subgraph Motor["Motor de historias interactivas"]
+        CU1(["Iniciar partida"])
+        CU2(["Ver la escena y sus opciones"])
+        CU3(["Elegir una opción"])
+        CU4(["Comenzar una nueva partida"])
+        CU5(["Cargar una historia y revisar sus errores"])
+        X1(["Llegar a un final"])
+        X2(["Informar bloqueo"])
+    end
+
+    L --- CU1
+    L --- CU2
+    L --- CU3
+    L --- CU4
+    E --- CU5
+    CU3 -. "«extend»" .- X1
+    CU3 -. "«extend»" .- X2
