@@ -1,4 +1,6 @@
-5a43ea9 | AlanCT | 2026-10-15 09:57:55 -0500 |  (HEAD -> main, origin/main, origin/HEAD) Anexo + Update Fuentes
+75cc76c | AlanCT | 2026-10-15 10:03:46 -0500 |  (HEAD -> main) Versiones v1.0 y v2.0 exportadas + README
+85ba7bc | AlanCT | 2026-10-15 10:00:16 -0500 |  (origin/main, origin/HEAD) Historial de git exportado
+5a43ea9 | AlanCT | 2026-10-15 09:57:55 -0500 |  Anexo + Update Fuentes
 38cb4e7 | AlanCT | 2026-10-15 09:41:06 -0500 |  readme regen
 63d014f | AlanCT | 2026-10-15 09:38:22 -0500 |  video + Update fuentes
 d442a43 | AlanCT | 2026-10-15 08:24:01 -0500 |  fix
