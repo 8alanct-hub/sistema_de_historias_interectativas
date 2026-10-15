@@ -44,7 +44,7 @@ La solución es un motor que interpreta historias escritas en archivos JSON, val
 Se prioriza la experiencia del usuario final (el lector), porque es quien usa el motor durante el festival:
 
 1. **Confiabilidad (RNF03):** lo más importante es que la experiencia no se interrumpa. Un cierre inesperado arruina la partida del lector, y es justo lo que la coordinadora pide evitar.
-2. **Facilidad de uso (RNF02):** toda la interfaz en español, para que cualquier lector del festival pueda leer y entender las escenas, las opciones y los avisos sin ayuda.
+2. **Facilidad de uso (RNF02):** toda la interfaz en español, para que cualquier lector del festival que sepa leer en español pueda entender las escenas, las opciones y los avisos sin ayuda (ver supuesto 2 en `04_requisitos.md`).
 3. **Claridad de errores (RNF01):** es importante para la escritora, pero la afecta mientras prepara la historia, no al lector durante el festival. Además, al estar la interfaz en español, los mensajes ya son legibles, y desde una correcta lectura se puede intuir dónde está el error.
 
 ## Decisión de responsabilidad profesional

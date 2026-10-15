@@ -34,12 +34,14 @@
 
 ## Conflicto: retroceso
 - **Conflicto:** la escritora quiere permitir retroceder siempre; el diseñador quiere que las decisiones sean irreversibles.
-- **Pregunta de aclaración:** _(pendiente — formularla)_
+- **Pregunta de aclaración (propuesta al cliente):** ¿Les parece bien que, al iniciar, el lector elija entre dos modos: **"Modo historia"**, donde las decisiones son definitivas, y **"Modo libre"**, donde puede retroceder y cambiar sus elecciones? Así se respetan tanto la visión de la escritora como la del diseñador.
 - **Acuerdo provisional:** en la versión 1 no se implementa retroceso. Se mantiene así hasta que el cliente responda la pregunta de aclaración; no se presupone su decisión.
 
 ## Preguntas y respuestas / supuestos
 1. **Supuesto:** no se analizan automáticamente todos los caminos posibles de la historia (la guía no lo exige, pág. 4). Los bloqueos se detectan durante la partida (RF13) y no al cargar el archivo.
-2.
-3.
+2. **Supuesto:** todos los usuarios del motor (el lector, la escritora principal, el diseñador de la experiencia y la coordinadora del festival) saben leer en español. Por eso la interfaz, los mensajes y las historias están solo en español (RNF02) y no se incluye traducción (ver Alcance en `01_fundamentos.md`).
+3. **Supuesto:** el lector elige una opción escribiendo en la consola el número con el que aparece en pantalla (1, 2, 3…), como es habitual en los menús de consola. Solo se numeran las opciones habilitadas (RF04). Cualquier otra entrada se considera inválida (RF07, RNF03).
 
 ## Ambigüedad o defecto detectado y su corrección
+- **Defecto:** en el primer planteamiento, varios requisitos funcionales no eran atómicos; cada uno mezclaba varios comportamientos. Por ejemplo, el requisito "seguir cronología" incluía avanzar a la escena destino, aplicar los efectos de la opción y rechazar entradas erróneas; y el de "final" incluía reconocer el final y comenzar una nueva partida.
+- **Corrección:** se dividieron en requisitos independientes, cada uno con un solo comportamiento observable y su propio criterio de aceptación (RF05, RF06 y RF07; RF09 y RF10). Así cada requisito puede verificarse con una prueba concreta.
