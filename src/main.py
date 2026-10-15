@@ -16,6 +16,11 @@ from motor import Partida
 HISTORIA_POR_DEFECTO = "data/la_ultima_transmision.json"
 SEPARADOR = "-" * 60
 
+# Interruptor de la limpieza de la consola. Se puso en False solo para tomar las
+# capturas de la verificación de los RNF, así se veía todo el recorrido en una
+# sola captura. En uso normal queda en True.
+LIMPIAR_PANTALLA = True
+
 
 def limpiar_pantalla():
     """Limpia la consola para que solo se vea la escena actual.
@@ -23,7 +28,7 @@ def limpiar_pantalla():
     Solo se limpia cuando el programa se usa en una consola real, para no
     afectar las pruebas ni la salida redirigida a un archivo.
     """
-    if sys.stdout.isatty():
+    if LIMPIAR_PANTALLA and sys.stdout.isatty():
         os.system("cls" if os.name == "nt" else "clear")
 
 
