@@ -3,8 +3,8 @@
 ## Backlog y tablero
 El backlog se gestionó como issues de GitHub, organizados en un tablero Kanban de GitHub Projects (Todo, In Progress, Done). Como el proyecto lo desarrolla un solo integrante, todas las tareas están asignadas al autor como responsable.
 
-- Captura inicial: `screenshots/tablero_inicial.png`
-- Captura final: `screenshots/tablero_final.png`
+- Captura inicial: `images/tableroInicial.png`
+- Captura final: `images/tableroFinal.png`
 
 ## Prácticas ágiles utilizadas
 1. **Tablero Kanban con límite de trabajo en curso:** las tareas se visualizan en el tablero y se evita tener muchas en progreso al mismo tiempo, para terminar una antes de empezar otra. *Evidencia:* capturas del tablero.
