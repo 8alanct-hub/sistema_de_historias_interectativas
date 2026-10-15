@@ -30,9 +30,9 @@ def test_i1_recorrido_completo_hasta_cada_final(elecciones, final_esperado):
 def test_i1_segunda_historia_funciona_con_el_mismo_motor():
     partida = Partida(cargar_historia(RUTA_SEGUNDA_HISTORIA))
 
-    assert partida.elegir_opcion("O1") is True   # hablar con EVA → ia_autonoma
+    assert partida.elegir_opcion("O1") is True   # hablar con SASHA → ia_autonoma
     assert [o.id for o in partida.opciones_disponibles()] == ["O1", "O2", "O3"]
-    assert partida.elegir_opcion("O1") is True   # permitir que EVA estudie
+    assert partida.elegir_opcion("O1") is True   # permitir que SASHA estudie
     assert partida.escena_actual.id == "S5"
     assert partida.en_escena_final()
 
@@ -40,7 +40,7 @@ def test_i1_segunda_historia_funciona_con_el_mismo_motor():
 def test_i1_segunda_historia_condicion_no_cumplida():
     partida = Partida(cargar_historia(RUTA_SEGUNDA_HISTORIA))
 
-    partida.elegir_opcion("O3")   # revisar registros sin hablar con EVA
+    partida.elegir_opcion("O3")   # revisar registros sin hablar con SASHA
 
     assert [o.id for o in partida.opciones_disponibles()] == ["O2", "O3"]
 

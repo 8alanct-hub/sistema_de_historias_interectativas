@@ -64,6 +64,7 @@ Siempre desde la carpeta descomprimida del proyecto y con el entorno virtual act
 | Jugar "La última transmisión" | `python src/main.py` |
 | Jugar la segunda historia ("El último algoritmo") | `python src/main.py data/segunda_historia.json` |
 | Cargar cualquier otra historia | `python src/main.py ruta/al/archivo.json` |
+| Ver el mensaje de un archivo con errores (destino inexistente) | `python src/main.py data/error_destino_inexistente.json` |
 | Ejecutar las pruebas | `python -m pytest -v` |
 | Guardar el registro de las pruebas (PowerShell) | `python -m pytest -v \| Out-File -Encoding utf8 docs/resultado_pruebas.txt` |
 
@@ -146,7 +147,7 @@ src/
   motor.py       Partida: reglas del juego y deshacer
   modelo.py      Historia, Escena, EscenaIntermedia, EscenaFinal y Opcion
   cargador.py    Lectura y validación del JSON
-data/            Historias (JSON)
+data/            Historias (JSON) y un ejemplo con error (error_destino_inexistente.json)
 test/            Pruebas automatizadas (pytest)
 docs/            Documentación, diagramas, capturas y registro de pruebas
 herramientas/    Script que genera este README

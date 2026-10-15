@@ -7,7 +7,7 @@ El autor dirigió el trabajo: tomó las decisiones, propuso ideas y revisó y ve
 | Tarea | Aporte del autor | Archivos | Commits |
 |---|---|---|---|
 | Organización y versionado | Creó el repositorio, el tablero Kanban con sus issues y responsables y las capturas del tablero. Hizo todos los commits y creó los tags `v1.0` y `v2.0`. | `docs/images/`, `docs/03_agilidad.md` | `f19bd2e` y siguientes |
-| Segunda historia | Idea y trama propias de "El último algoritmo"; cambio del protagonista a Darío y nueva redacción del final S3. | `data/segunda_historia.json` | `2517695` |
+| Segunda historia | Idea y trama propias de "El último algoritmo"; cambio de los nombres de los protagonistas a Dario y SASHA y nueva redacción del final S3. | `data/segunda_historia.json` | `2517695` |
 | Fundamentos | Riesgos, priorización de los atributos de calidad, decisión sobre los datos del lector y uso del término "motor". | `docs/01_fundamentos.md` | `9d88603` |
 | Proceso y agilidad | Elección de Kanban, definición de terminado y aprendizaje. Corrigió el registro de aprendizajes. | `docs/02_proceso.md`, `docs/03_agilidad.md` | `f60607f` |
 | Requisitos | Planteó los RF, eligió los atributos de los RNF y propuso el supuesto 3 (entrada numérica) con su justificación. | `docs/04_requisitos.md` | `10cc46b`, `1e5ad14`, `050daff` |

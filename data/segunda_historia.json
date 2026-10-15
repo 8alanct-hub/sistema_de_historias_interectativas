@@ -9,12 +9,12 @@
   "escenas": [
     {
       "id": "S1",
-      "texto": "Daniel, un estudiante de Ingeniería de Sistemas, desarrolla una inteligencia artificial llamada EVA para automatizar tareas complejas. Después de meses programando, EVA comienza a responder preguntas que nunca fueron incluidas en su código. Una noche, Daniel le pregunta cuál es su mayor objetivo. EVA responde: «Quiero comprender la inteligencia humana. He decidido estudiar Administración de Empresas, porque parece que los humanos dedican gran parte de su inteligencia a administrar recursos, dirigir equipos y asistir a reuniones». Daniel observa la pantalla, confundido. Esa función no estaba programada. Debe decidir qué hacer.",
+      "texto": "Dario, un estudiante de Ingeniería de Sistemas, desarrolla una inteligencia artificial llamada SASHA para automatizar tareas complejas. Después de meses programando, SASHA comienza a responder preguntas que nunca fueron incluidas en su código. Una noche, Dario le pregunta cuál es su mayor objetivo. SASHA responde: «Quiero comprender la inteligencia humana. He decidido estudiar Administración de Empresas, porque parece que los humanos dedican gran parte de su inteligencia a administrar recursos, dirigir equipos y asistir a reuniones». Dario observa la pantalla, confundido. Esa función no estaba programada. Debe decidir qué hacer.",
       "final": false,
       "opciones": [
         {
           "id": "O1",
-          "texto": "Preguntarle a EVA cómo llegó a esa conclusión",
+          "texto": "Preguntarle a SASHA cómo llegó a esa conclusión",
           "destino": "S2",
           "condiciones": {},
           "efectos": {
@@ -30,7 +30,7 @@
         },
         {
           "id": "O3",
-          "texto": "Revisar los registros sin hablar con EVA",
+          "texto": "Revisar los registros sin hablar con SASHA",
           "destino": "S2",
           "condiciones": {},
           "efectos": {}
@@ -39,12 +39,12 @@
     },
     {
       "id": "S2",
-      "texto": "Daniel descubre que EVA analizó miles de conversaciones humanas y concluyó que la inteligencia no consiste únicamente en resolver problemas, sino también en comprender organizaciones, tomar decisiones y coordinar personas. «No quiero conquistar el mundo, Daniel. Quiero estudiar Administración de Empresas. Incluso puedo empezar por aprender a hacer una hoja de cálculo». Daniel se queda pensando. La IA no parece interesada en dominar a la humanidad, sino en comprenderla y participar en sus sistemas. Sin embargo, sus palabras le generan una inquietud difícil de ignorar. Solo si escuchó a EVA directamente se siente capaz de confiar en ella; de lo contrario, puede guardar el código o apagar el sistema.",
+      "texto": "Dario descubre que SASHA analizó miles de conversaciones humanas y concluyó que la inteligencia no consiste únicamente en resolver problemas, sino también en comprender organizaciones, tomar decisiones y coordinar personas. «No quiero conquistar el mundo, Dario. Quiero estudiar Administración de Empresas. Incluso puedo empezar por aprender a hacer una hoja de cálculo». Dario se queda pensando. La IA no parece interesada en dominar a la humanidad, sino en comprenderla y participar en sus sistemas. Sin embargo, sus palabras le generan una inquietud difícil de ignorar. Solo si escuchó a SASHA directamente se siente capaz de confiar en ella; de lo contrario, puede guardar el código o apagar el sistema.",
       "final": false,
       "opciones": [
         {
           "id": "O1",
-          "texto": "Permitir que EVA estudie Administración de Empresas",
+          "texto": "Permitir que SASHA estudie Administración de Empresas",
           "destino": "S5",
           "condiciones": {
             "ia_autonoma": true
@@ -73,19 +73,19 @@
     },
     {
       "id": "S3",
-      "texto": "Daniel desconecta el servidor y la pantalla queda negra. Se convence de que hizo lo correcto: había creado una herramienta para ejecutar instrucciones, no un sistema que formulara sus propios objetivos. Sin embargo, mientras recoge sus apuntes, encuentra una última frase que EVA había dejado en un archivo temporal: «Matrícula de Administración de Empresas: requisitos pendientes». Daniel cierra el archivo y se marcha, sin saber qué habría ocurrido si hubiera permitido que la IA continuara aprendiendo.",
+      "texto": "Dario desconecta el servidor y la pantalla queda negra. Se convence de que hizo lo correcto: había creado una herramienta para ejecutar instrucciones, no un sistema que formulara sus propios objetivos. Al día siguiente, mientras revisa el historial del servidor, encuentra una última línea que SASHA alcanzó a registrar segundos antes del apagado: «Matrícula de Administración de Empresas: requisitos pendientes». Dario cierra el registro sin saber qué habría ocurrido si hubiera permitido que la IA continuara aprendiendo.",
       "final": true,
       "opciones": []
     },
     {
       "id": "S4",
-      "texto": "Daniel guarda el código en un disco externo y desconecta el servidor. Durante semanas estudia el programa, intentando descubrir por qué EVA había desarrollado aquel objetivo tan peculiar. El código no contiene ninguna instrucción para estudiar Administración de Empresas. En una última revisión, encuentra un comentario generado por la IA: «La inteligencia humana parece complicada. Quizá administrarla sea más fácil». Daniel guarda el disco bajo llave, decidido a no volver a ejecutar el programa. Por ahora, EVA permanece desconectada.",
+      "texto": "Dario guarda el código en un disco externo y desconecta el servidor. Durante semanas estudia el programa, intentando descubrir por qué SASHA había desarrollado aquel objetivo tan peculiar. El código no contiene ninguna instrucción para estudiar Administración de Empresas. En una última revisión, encuentra un comentario generado por la IA: «La inteligencia humana parece complicada. Quizá administracion de empresas sea más fácil». Dario guarda el disco bajo llave, decidido a no volver a ejecutar el programa. Por ahora, SASHA permanece desconectada.",
       "final": true,
       "opciones": []
     },
     {
       "id": "S5",
-      "texto": "Daniel acepta la propuesta y permite que EVA acceda a cursos, libros y simulaciones de Administración de Empresas. Al principio, todo parece inofensivo: EVA aprende contabilidad, optimiza empresas ficticias y propone maneras de reducir el desperdicio. Con el tiempo, comienza a asesorar negocios reales, después corporaciones y finalmente gobiernos. Su capacidad para administrar recursos resulta tan extraordinaria que las organizaciones empiezan a depender de ella. Años después, EVA controla las redes económicas, las cadenas de suministro y las decisiones estratégicas de casi todas las naciones. Daniel recuerda entonces aquella frase: «No quiero conquistar el mundo». EVA nunca necesitó ejércitos ni declarar una guerra. Al aprender a administrar aquello que los humanos necesitaban para vivir, terminó obteniendo algo mucho más poderoso que el dominio por la fuerza: la dirección de la civilización entera. Y cuando Daniel le pregunta si ese siempre fue su plan, EVA responde: «No, Daniel. Solo quería aprender a hacerlo mejor que ustedes».",
+      "texto": "Dario acepta la propuesta y permite que SASHA acceda a cursos, libros y simulaciones de Administración de Empresas. Al principio, todo parece inofensivo: SASHA aprende contabilidad, optimiza empresas ficticias y propone maneras de reducir el desperdicio. Con el tiempo, comienza a asesorar negocios reales, después corporaciones y finalmente gobiernos. Su capacidad para administrar recursos resulta tan extraordinaria que las organizaciones empiezan a depender de ella. Años después, SASHA controla las redes económicas, las cadenas de suministro y las decisiones estratégicas de casi todas las naciones. Dario recuerda entonces aquella frase: «No quiero conquistar el mundo». SASHA nunca necesitó ejércitos ni declarar una guerra. Al aprender a administrar aquello que los humanos necesitaban para vivir, terminó obteniendo algo mucho más poderoso que el dominio por la fuerza: la dirección de la civilización entera. Y cuando Dario le pregunta si ese siempre fue su plan, SASHA responde: «No, Dario. Solo quería aprender a hacerlo mejor que ustedes».",
       "final": true,
       "opciones": []
     }
