@@ -25,6 +25,15 @@
 | RF12 | **Informar la causa del error:** cuando rechaza un archivo, el motor muestra un mensaje con la causa y el campo o ID involucrado. | N06 | Con el destino E99, el mensaje indica que el destino no existe e identifica la opción y la escena donde está. |
 | RF13 | **Informar bloqueo:** si durante una partida una escena no final no tiene opciones habilitadas, el motor informa el bloqueo y permite reiniciar. | N02, N05 | Con una historia de prueba donde la única opción de una escena no final tiene una condición imposible, se muestra el aviso de bloqueo y la opción de reiniciar. |
 
+### Requisitos agregados por la solicitud de cambio (hora 6)
+| ID | Requisito | Origen | Criterio de aceptación |
+|---|---|---|---|
+| RF14 | **Deshacer la última decisión:** el motor restaura exactamente la escena y todas las variables de antes de la última elección válida. | Solicitud de cambio | Desde E2, "Investigar archivo" lleva a E3 con `conoce_origen` verdadero; deshacer devuelve E2 con `conoce_origen` falso. |
+| RF15 | **Deshacer desde un final:** se puede deshacer estando en una escena final. | Solicitud de cambio | Desde E4, E5 o E6, deshacer vuelve a E3 con los valores previos a esa elección. |
+| RF16 | **Un solo nivel de retroceso:** después de deshacer, no se puede volver a deshacer hasta hacer una nueva elección válida. No se ofrece rehacer. | Solicitud de cambio | Un segundo intento de deshacer no cambia nada; tras una nueva elección válida, se puede deshacer otra vez. |
+| RF17 | **Sin retroceso al iniciar ni al reiniciar:** al comenzar no hay nada que deshacer, y reiniciar elimina el historial. | Solicitud de cambio | Al iniciar no se puede deshacer; tras llegar a E4 y reiniciar, tampoco. |
+| RF18 | **Entrada inválida conserva el retroceso:** una entrada inválida no modifica la partida ni reemplaza lo que se puede deshacer. | Solicitud de cambio | Tras elegir "Investigar archivo" y escribir una entrada inválida en E3, deshacer sigue devolviendo E2. |
+
 ## Requisitos no funcionales
 | ID | Atributo | Medida | Procedimiento | Evidencia |
 |---|---|---|---|---|
@@ -35,12 +44,14 @@
 ## Conflicto: retroceso
 - **Conflicto:** la escritora quiere permitir retroceder siempre; el diseñador quiere que las decisiones sean irreversibles.
 - **Pregunta de aclaración (propuesta al cliente):** ¿Les parece bien que, al iniciar, el lector elija entre dos modos: **"Modo historia"**, donde las decisiones son definitivas, y **"Modo libre"**, donde puede retroceder y cambiar sus elecciones? Así se respetan tanto la visión de la escritora como la del diseñador.
-- **Acuerdo provisional:** en la versión 1 no se implementa retroceso. Se mantiene así hasta que el cliente responda la pregunta de aclaración; no se presupone su decisión.
+- **Acuerdo provisional (versión 1, `v1.0`):** no se implementa retroceso hasta que el cliente responda la pregunta de aclaración; no se presupone su decisión.
+- **Respuesta del cliente (solicitud de cambio, hora 6):** el lector debe poder deshacer su última decisión, revirtiendo todas sus consecuencias, con un solo nivel de retroceso. No se adoptan los dos modos propuestos. Esta decisión reemplaza el acuerdo provisional y se implementa con RF14–RF18.
 
 ## Preguntas y respuestas / supuestos
 1. **Supuesto:** no se analizan automáticamente todos los caminos posibles de la historia (la guía no lo exige, pág. 4). Los bloqueos se detectan durante la partida (RF13) y no al cargar el archivo.
 2. **Supuesto:** todos los usuarios del motor (el lector, la escritora principal, el diseñador de la experiencia y la coordinadora del festival) saben leer en español. Por eso la interfaz, los mensajes y las historias están solo en español (RNF02) y no se incluye traducción (ver Alcance en `01_fundamentos.md`).
 3. **Supuesto:** el lector elige una opción escribiendo en la consola el número con el que aparece en pantalla (1, 2, 3…), como es habitual en los menús de consola. Solo se numeran las opciones habilitadas (RF04). Cualquier otra entrada se considera inválida (RF07, RNF03).
+4. **Supuesto (agregado con la solicitud de cambio):** cuando se puede deshacer, aparece la opción **"0. Deshacer la última decisión"**, también en los finales y en el bloqueo. Si no se puede deshacer, el 0 se trata como entrada inválida (RF07).
 
 ## Ambigüedad o defecto detectado y su corrección
 - **Defecto:** en el primer planteamiento, varios requisitos funcionales no eran atómicos; cada uno mezclaba varios comportamientos. Por ejemplo, el requisito "seguir cronología" incluía avanzar a la escena destino, aplicar los efectos de la opción y rechazar entradas erróneas; y el de "final" incluía reconocer el final y comenzar una nueva partida.

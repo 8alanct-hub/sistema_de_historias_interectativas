@@ -11,6 +11,7 @@ flowchart LR
         CU2(["Ver la escena y sus opciones"])
         CU3(["Elegir una opción"])
         CU4(["Comenzar una nueva partida"])
+        CU6(["Deshacer la última decisión"])
         CU5(["Cargar una historia y revisar sus errores"])
         X1(["Llegar a un final"])
         X2(["Informar bloqueo"])
@@ -20,6 +21,7 @@ flowchart LR
     L --- CU2
     L --- CU3
     L --- CU4
+    L --- CU6
     E --- CU5
     CU3 -. "«extend»" .- X1
     CU3 -. "«extend»" .- X2

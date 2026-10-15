@@ -9,8 +9,8 @@ stateDiagram-v2
     state "Sin opciones disponibles" as SinOpciones
 
     [*] --> EnCurso : se crea la partida
-    EnCurso --> EnCurso : entrada inválida (sin cambios) o elección hacia escena intermedia
+    EnCurso --> EnCurso : entrada inválida (sin cambios), elección hacia escena intermedia o deshacer()
     EnCurso --> EnEscenaFinal : elección hacia escena final
     EnCurso --> SinOpciones : elección hacia escena sin opciones habilitadas
-    EnEscenaFinal --> EnCurso : reiniciar()
-    SinOpciones --> EnCurso : reiniciar()
+    EnEscenaFinal --> EnCurso : reiniciar() o deshacer()
+    SinOpciones --> EnCurso : reiniciar() o deshacer()

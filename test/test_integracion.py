@@ -43,3 +43,26 @@ def test_i1_segunda_historia_condicion_no_cumplida():
     partida.elegir_opcion("O3")   # revisar registros sin hablar con EVA
 
     assert [o.id for o in partida.opciones_disponibles()] == ["O2", "O3"]
+
+
+# I1 extendido. Deshacer desde un final después de cargar el archivo y recorrer la historia (RF15).
+@pytest.mark.parametrize(
+    "elecciones, final_esperado, variables_previas",
+    [
+        (["1", "1", "1"], "E4", {"conoce_origen": True, "confia_en_la_voz": False}),
+        (["1", "2", "1"], "E5", {"conoce_origen": False, "confia_en_la_voz": False}),
+        (["1", "2", "2"], "E6", {"conoce_origen": False, "confia_en_la_voz": False}),
+    ],
+    ids=["desde_E4", "desde_E5", "desde_E6"],
+)
+def test_i1_deshacer_desde_un_final(elecciones, final_esperado, variables_previas):
+    partida = Partida(cargar_historia(RUTA_HISTORIA))
+    for entrada in elecciones:
+        partida.elegir_por_numero(entrada)
+    assert partida.escena_actual.id == final_esperado
+
+    assert partida.deshacer() is True
+
+    assert partida.escena_actual.id == "E3"
+    assert partida.variables == variables_previas
+    assert not partida.en_escena_final()

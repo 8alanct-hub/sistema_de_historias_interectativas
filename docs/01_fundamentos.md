@@ -25,13 +25,14 @@ La solución es un motor que interpreta historias escritas en archivos JSON, val
 - Recordar el estado de la partida (variables booleanas) mientras dura.
 - Rechazar entradas inválidas sin cerrar el programa.
 - Reconocer los finales, informar bloqueos y comenzar una nueva partida.
+- Deshacer la última decisión, con un solo nivel de retroceso (agregado por la solicitud de cambio, ver `08_cambio.md`).
 - Interfaz en español.
 
 ### No incluye
 - Traducción de la interfaz a otros idiomas.
 - Traducción de las historias.
 - Menú o interfaz visual fuera de la consola.
-- Retroceso a decisiones anteriores (conflicto documentado en `04_requisitos.md`).
+- Retroceso de varios niveles y rehacer una decisión deshecha (la solicitud de cambio solo pide deshacer la última decisión).
 - Límites del ejercicio definidos en la guía (pág. 2): cuentas de usuario, base de datos, guardado entre ejecuciones, conexión a internet, editor visual, audio, imágenes y lenguaje de expresiones.
 
 ## Riesgos y mitigaciones

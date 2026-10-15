@@ -39,16 +39,28 @@ def mostrar_escena(partida):
 def mostrar_opciones(partida):
     for numero, opcion in enumerate(partida.opciones_disponibles(), start=1):
         print(f"  {numero}. {opcion.texto}")
+    mostrar_opcion_deshacer(partida)
+
+
+def mostrar_opcion_deshacer(partida):
+    """Muestra la opción 0 solo cuando hay una decisión que se pueda deshacer (supuesto 4)."""
+    if partida.puede_deshacer():
+        print("  0. Deshacer la última decisión")
 
 
 def ofrecer_nueva_partida(partida):
-    """Después de un final o un bloqueo, espera a que el lector pida una nueva partida (RF10)."""
+    """Después de un final o un bloqueo, ofrece una nueva partida (RF10) o deshacer (RF15)."""
     while True:
-        entrada = input("\nEscribe 1 para comenzar una nueva partida: ")
+        print("\n  1. Comenzar una nueva partida")
+        mostrar_opcion_deshacer(partida)
+        entrada = input("\nElige una opción: ")
         if entrada.strip() == "1":
             partida.reiniciar()
             return
-        print("Entrada no válida. Escribe 1 para comenzar una nueva partida.")
+        # En un final no hay opciones numeradas: la partida solo acepta el 0 para deshacer.
+        if partida.elegir_por_numero(entrada):
+            return
+        print("Entrada no válida. Escribe el número de una de las opciones.")
 
 
 def jugar(partida):

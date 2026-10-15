@@ -23,6 +23,7 @@ Solo aparecen los actores que usan el motor directamente. El diseñador de la ex
 | Ver la escena y sus opciones | Lector | RF03, RF04 |
 | Elegir una opción | Lector | RF05, RF06, RF07, RF08 |
 | Comenzar una nueva partida | Lector | RF10 |
+| Deshacer la última decisión | Lector | RF14–RF18 (solicitud de cambio) |
 | Cargar una historia y revisar sus errores | Escritora principal | RF11, RF12 |
 
 Llegar a un final (RF09) e informar un bloqueo (RF13) no son casos de uso que el lector solicite: son resultados posibles de elegir una opción, por eso se representan como extensiones («extend») de "Elegir una opción".
@@ -39,8 +40,10 @@ Llegar a un final (RF09) e informar un bloqueo (RF13) no son casos de uso que el
 | `EscenaIntermedia` | Escena no final; ofrece una o más opciones. | RF04, RF11 |
 | `EscenaFinal` | Escena final; no tiene opciones. | RF09, RF11 |
 | `Opcion` | Texto visible, escena destino, condiciones y efectos; sabe si está habilitada con las variables actuales. | RF04, RF05, RF06 |
-| `Partida` | Estado de la partida en curso (escena actual y variables); muestra las opciones habilitadas, procesa la elección (`elegir_por_numero()` recibe lo que escribe el lector y valida que sea un número dentro del rango; `elegir_opcion()` recibe un id y valida que la opción exista y esté habilitada), detecta el final y el bloqueo, y reinicia. `sin_opciones_disponibles()` es verdadero solo si la escena actual no es final y ninguna de sus opciones está habilitada (bloqueo, RF13); en una escena final no se considera bloqueo. | RF02, RF04–RF10, RF13 |
+| `Partida` | Estado de la partida en curso (escena actual, variables y respaldo de la última elección válida); muestra las opciones habilitadas, procesa la elección (`elegir_por_numero()` recibe lo que escribe el lector y valida que sea un número dentro del rango; `elegir_opcion()` recibe un id y valida que la opción exista y esté habilitada), detecta el final y el bloqueo, y reinicia. `sin_opciones_disponibles()` es verdadero solo si la escena actual no es final y ninguna de sus opciones está habilitada (bloqueo, RF13); en una escena final no se considera bloqueo. | RF02, RF04–RF10, RF13, RF14–RF18 |
 
+- **Solicitud de cambio:** `Partida` guarda en `respaldo` la escena y una copia de las variables antes de cada elección válida. `deshacer()` las restaura y vacía el respaldo (un solo nivel); `reiniciar()` también lo vacía. En `elegir_por_numero()`, el 0 significa deshacer (supuesto 4).
+- `Historia.obtener_escena()` y la excepción `ErrorDeContenido` (que lanzan las escenas al crearse con una cantidad de opciones incorrecta) se agregaron al diagrama para que coincida con el código.
 - Las variables, las condiciones y los efectos se modelan como atributos de tipo diccionario (nombre → verdadero/falso), igual que en el formato JSON.
 - La escena se divide en `EscenaIntermedia` y `EscenaFinal` (ver la decisión de diseño en `07_implementacion.md`). El formato JSON no cambia: el cargador crea una u otra según el campo `"final"`.
 - Se usa la convención de Python: clases en PascalCase y atributos y métodos en snake_case, igual que las claves del JSON (`conoce_origen`).
@@ -68,4 +71,5 @@ Llegar a un final (RF09) e informar un bloqueo (RF13) no son casos de uso que el
 - Los nombres de los estados coinciden con los métodos de `Partida`, para mantener el mismo vocabulario.
 - Se usa "Sin opciones disponibles" en lugar de "Bloqueada" porque el bloqueo no es culpa del lector: no dejó de hacer nada, simplemente la historia no ofrece opciones habilitadas en ese punto.
 - Desde "En escena final" y "Sin opciones disponibles" el lector puede comenzar una nueva partida (`reiniciar()`, RF10).
+- **Solicitud de cambio:** desde cualquier estado, si hay una decisión previa, `deshacer()` devuelve la partida a "En curso" con la escena y las variables anteriores (RF14, RF15). Después de deshacer no se puede volver a deshacer hasta otra elección válida (RF16).
 - Si el archivo de la historia tiene errores, la partida no llega a crearse (RF11, CA03). Eso ocurre en el cargador, antes de este diagrama, por lo que no se representa aquí.
