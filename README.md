@@ -13,6 +13,8 @@ El motor solo usa la biblioteca estándar de Python (`json`, `sys`, `os`).
 ## Instalación
 El proyecto se entrega en el archivo `Parcial_ChiquilloAlan.zip`. No requiere internet para jugar.
 
+> **Qué versión usar:** la carpeta principal del ZIP (la que contiene este README) es la versión final que se entrega y la que se debe instalar, ejecutar y probar. La carpeta `versiones/` solo guarda, como evidencia, el código de antes y de después de la solicitud de cambio (ver la sección "Versiones"); no hace falta abrirla para revisar el proyecto.
+
 1. **Descomprimir** el archivo ZIP (clic derecho → *Extraer todo…*).
 2. **Abrir una consola en la carpeta descomprimida**, la que contiene `README.md`, `src/` y `data/`.
    En Windows: abrir la carpeta en el Explorador, escribir `cmd` en la barra de direcciones y pulsar Enter.
@@ -151,11 +153,21 @@ data/            Historias (JSON) y un ejemplo con error (error_destino_inexiste
 test/            Pruebas automatizadas (pytest)
 docs/            Documentación, diagramas, capturas y registro de pruebas
 herramientas/    Script que genera este README
+versiones/       Código de las versiones v1.0 y v2.0 (ZIP exportado de cada tag)
 ```
 
 ## Versiones
-- `v1.0`: versión inicial, antes de la solicitud de cambio.
-- `v2.0`: versión con la solicitud de cambio implementada (deshacer la última decisión).
+| Versión | Tag | Commit | Contenido |
+|---|---|---|---|
+| Anterior al cambio | `v1.0` | `50bc184` | Versión inicial: requisitos, modelos, arquitectura, código y pruebas U1–U5 e I1. |
+| Posterior al cambio | `v2.0` | `6ce430d` | Solicitud de cambio implementada: deshacer la última decisión (RF14–RF18) y pruebas U6. |
+
+La guía pide identificar la versión anterior y la posterior a la solicitud de cambio. Por eso, además del historial de Git, se incluye el código de cada una:
+
+- `versiones/v1.0.zip`: el proyecto tal como estaba en el tag `v1.0`, antes del cambio (sin deshacer).
+- `versiones/v2.0.zip`: el proyecto tal como estaba en el tag `v2.0`, justo después de implementar el cambio.
+
+Ambos se exportaron directamente desde su tag con `git archive`, así que no fueron modificados a mano. Sirven para comparar el antes y el después del cambio; la versión que se evalúa es la carpeta principal, que además incluye todo lo que se hizo después de `v2.0` (README, matriz de trazabilidad, verificación de los RNF, declaración de aportes, informe, anexo y video). En `docs/historial_git.txt` cada tag aparece junto a su commit.
 
 ## Limitaciones conocidas
 - El motor no analiza todos los caminos posibles de una historia al cargarla; por ejemplo, no detecta finales inalcanzables. Los bloqueos se informan durante la partida.
