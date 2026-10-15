@@ -1,4 +1,4 @@
-"""Genera el README.md uniendo docs/readme_base.md con los documentos 01 a 08.
+"""Genera el README.md uniendo docs/readme_base.md con los documentos 01 a 09.
 
 Uso (desde la carpeta del proyecto):
     python herramientas/generar_readme.py
@@ -23,6 +23,7 @@ DOCUMENTOS = [
     "06_arquitectura.md",
     "07_implementacion.md",
     "08_cambio.md",
+    "09_trazabilidad.md",
 ]
 
 
@@ -48,7 +49,7 @@ def main():
     partes = [(DOCS / "readme_base.md").read_text(encoding="utf-8").rstrip()]
     partes.append("\n\n---\n\n# Documentación\n")
     partes.append(
-        "Contenido de `docs/01_fundamentos.md` a `docs/08_cambio.md`. "
+        "Contenido de `docs/01_fundamentos.md` a `docs/09_trazabilidad.md`. "
         "Haga clic en cada título para desplegarlo. "
         "Las fuentes y herramientas de apoyo están en `docs/fuentes.md`.\n"
     )
