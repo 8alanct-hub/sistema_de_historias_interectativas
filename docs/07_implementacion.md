@@ -1,7 +1,7 @@
 # 7. Implementación
 
 ## Decisión de diseño detallado
-> **Borrador:** decisión tomada durante el modelado de clases. Se confirmará o ajustará cuando se implementen el cargador y el motor.
+Decisión tomada durante el modelado de clases y confirmada en la implementación (`modelo.py` y `cargador.py`).
 
 **Decisión:** separar la escena en dos clases, `EscenaIntermedia` y `EscenaFinal`, que heredan de una clase general `Escena` (id y texto).
 

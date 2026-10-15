@@ -30,3 +30,44 @@ Cada requisito se relaciona con su origen, los modelos donde aparece, el código
 | RNF01 Claridad de errores | Voz de la coordinadora | Contexto; clase `ErrorDeContenido` | `cargador.py`; `modelo.py` | `test_u4_*` (16 casos con mensaje que identifica el ID o campo); `docs/resultado_pruebas.txt` |
 | RNF02 Facilidad de uso (interfaz en español) | Voces del cliente; supuesto 2 | Componentes (capa de interfaz) | `main.py` (todos los textos) | Revisión de los textos de la interfaz en el recorrido de los tres finales, una entrada inválida y un error de carga (ver "Verificación de los RNF") |
 | RNF03 Confiabilidad | Voz de la coordinadora | Secuencia; estados | `motor.py` → `elegir_por_numero()`; `main.py` → `main()` (captura de Ctrl + C y errores inesperados) | `test_u3_entrada_invalida_por_numero_deja_el_estado_intacto` (7 variantes); `test_u3_cero_sin_retroceso_disponible_es_invalido`; prueba manual en consola |
+
+## Verificación de los RNF
+RNF01 se verifica con las pruebas automatizadas `test_u4_*` (ver `docs/resultado_pruebas.txt`). RNF02 y RNF03 requieren además una revisión en la consola, que se registra a continuación.
+
+**Cómo se hizo:** se ejecutó `python src/main.py` con la historia principal y se recorrieron los tres finales. En el camino se escribieron entradas inválidas, se usó la opción de deshacer y se cargaron archivos con errores.
+
+### RNF02: textos de la interfaz en español
+| Texto mostrado por el motor | Cuándo aparece | ¿En español? |
+|---|---|---|
+| `=== La última transmisión ===` (título de la historia) | En cada escena | Sí |
+| `1. Investigar archivo`, `2. Cortar comunicación`… (opciones numeradas) | En cada escena no final | Sí |
+| `0. Deshacer la última decisión` | Cuando hay una decisión que deshacer | Sí |
+| `Elige una opción:` | Al pedir una entrada | Sí |
+| `Entrada no válida. Escribe el número de una de las opciones.` | Ante una entrada inválida | Sí |
+| `*** FIN DE LA HISTORIA ***` | Al llegar a un final | Sí |
+| `1. Comenzar una nueva partida` | Después de un final o un bloqueo | Sí |
+| `No hay opciones disponibles en esta escena; la historia no puede continuar.` | En una escena sin opciones habilitadas | Sí |
+| `No se pudo cargar la historia.` seguido de la causa (por ejemplo: `La opción 'O1' de la escena 'E1' lleva a la escena 'E99', que no existe.`) | Al cargar un archivo con errores | Sí |
+| `No se encontró el archivo 'data/no_existe.json'.` | Al cargar un archivo que no existe | Sí |
+| `Partida terminada. ¡Hasta pronto!` | Al cerrar con Ctrl + C | Sí |
+| `Ocurrió un error inesperado y la partida no puede continuar.` | Ante un error no previsto | Sí |
+
+**Resultado:** 12 de 12 textos en español (100 %). No se muestran trazas técnicas de Python en ningún caso.
+
+### RNF03: entradas inválidas en la consola
+| Entrada | Escena | Resultado esperado | Resultado obtenido |
+|---|---|---|---|
+| `abc` (texto) | E1 | Aviso; la escena y las variables no cambian | Cumple |
+| Vacía (solo Enter) | E1 | Aviso; sin cambios | Cumple |
+| `9` (fuera de rango) | E1 | Aviso; sin cambios | Cumple |
+| `-1` (negativo) | E1 | Aviso; sin cambios | Cumple |
+| `1.5` (decimal) | E1 | Aviso; sin cambios | Cumple |
+| `0` sin decisión que deshacer | E1 | Aviso; sin cambios | Cumple |
+| `x` después de deshacer | E3 | Aviso; sin cambios | Cumple |
+| Ctrl + C | Cualquiera | Despedida, sin traza de error | Cumple |
+
+Una opción no habilitada no se muestra con número, así que escribir su posición equivale a un número fuera de rango; ese caso se cubre con `9`.
+
+**Resultado:** 0 cierres inesperados. El programa solo termina cuando el lector lo cierra (código de salida 0) o cuando el archivo de historia tiene errores (código de salida 1, con el mensaje correspondiente).
+
+**Evidencia:** captura de la consola en `docs/images/verificacion_consola.png`.
