@@ -1,0 +1,27 @@
+---
+config:
+  layout: elk
+---
+flowchart TB
+    subgraph CI["Capa de interfaz"]
+        MAIN["<b>main.py</b><br/>Muestra escenas, opciones y avisos.<br/>Pasa a la partida lo que escribe el lector, sin validarlo."]
+    end
+
+    subgraph CR["Capa de reglas"]
+        MOTOR["<b>motor.py</b> — Partida<br/>Estado de la partida (escena actual y variables).<br/>Valida entradas, aplica efectos, detecta final y bloqueo, reinicia."]
+        MODELO["<b>modelo.py</b><br/>Historia, Escena, EscenaIntermedia,<br/>EscenaFinal y Opcion.<br/>Estructura fija de la historia."]
+    end
+
+    subgraph CC["Capa de carga"]
+        CARGADOR["<b>cargador.py</b><br/>Lee el archivo JSON, valida su contenido<br/>y crea los objetos del modelo."]
+    end
+
+    subgraph CD["Contenido"]
+        JSON[("<b>data/*.json</b><br/>Historias escritas por<br/>la escritora y el diseñador")]
+    end
+
+    MAIN -- "1. pide cargar la historia" --> CARGADOR
+    MAIN -- "2. crea la partida y le envía las elecciones" --> MOTOR
+    CARGADOR -- "lee" --> JSON
+    CARGADOR -- "crea" --> MODELO
+    MOTOR -- "usa" --> MODELO
