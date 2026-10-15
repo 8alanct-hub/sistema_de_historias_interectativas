@@ -28,9 +28,9 @@
 ## Requisitos no funcionales
 | ID | Atributo | Medida | Procedimiento | Evidencia |
 |---|---|---|---|---|
-| RNF01 |  |  |  |  |
-| RNF02 |  |  |  |  |
-| RNF03 |  |  |  |  |
+| RNF01 | Claridad de errores | El 100 % de los 9 tipos de error de contenido definidos en la guía produce un mensaje en español que indica la causa y el campo o ID afectado, sin mostrar trazas técnicas de Python. | Se prepara un archivo de historia con cada tipo de error, se carga en el sistema y se revisa el mensaje obtenido. | Prueba automatizada que cubre los 9 tipos de error y registro de su última ejecución. |
+| RNF02 | Facilidad de uso | El 100 % de los textos que muestra la interfaz (instrucciones, opciones del sistema, avisos de final, bloqueo y errores) está en español. El uso del sistema se explica en el README; no se incluye tutorial dentro del programa. | Se recorren los tres finales de la historia principal, se provoca una entrada inválida y un error de carga, y se revisa cada texto mostrado por el sistema. | Grabación o capturas del recorrido y lista de los textos revisados. |
+| RNF03 | Confiabilidad | 0 cierres inesperados del programa ante entradas inválidas del lector: texto en lugar de número, número fuera de rango, entrada vacía y opción no habilitada. En todos los casos el sistema muestra un aviso y conserva la escena y las variables. | Se ejecuta una prueba automatizada que envía cada tipo de entrada inválida en distintas escenas y comprueba que el estado no cambia; además, se prueba manualmente en la consola. | Registro de ejecución de la prueba automatizada y captura de la prueba manual en consola. |
 
 ## Conflicto: retroceso
 - **Conflicto:** la escritora quiere permitir retroceder siempre; el diseñador quiere que las decisiones sean irreversibles.
