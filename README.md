@@ -6,7 +6,7 @@ Motor de consola que carga historias interactivas desde archivos JSON, valida su
 
 ## Versiones requeridas
 - Python 3.11 (probado con Python 3.11.9 en Windows)
-- pytest 8.3.3 (solo para ejecutar las pruebas)
+- pytest 8.3.3 (solo para ejecutar las pruebas; se instala dentro de un entorno virtual, ver Instalación)
 
 El motor solo usa la biblioteca estándar de Python (`json`, `sys`, `os`).
 
@@ -21,15 +21,43 @@ El proyecto se entrega en el archivo `Parcial_ChiquilloAlan.zip`. No requiere in
    python --version
    ```
    Si no está instalado, descargarlo desde python.org y marcar la opción *Add Python to PATH* durante la instalación.
-4. **Instalar la dependencia de las pruebas** (solo hace falta para ejecutar las pruebas, no para jugar):
+4. **Crear el entorno virtual** (solo la primera vez):
+   ```
+   python -m venv .venv
+   ```
+5. **Activar el entorno virtual** (cada vez que se abra una consola nueva):
+
+   | Consola | Comando |
+   |---|---|
+   | Símbolo del sistema (`cmd`) | `.venv\Scripts\activate` |
+   | PowerShell | `.venv\Scripts\Activate.ps1` |
+   | Mac o Linux | `source .venv/bin/activate` |
+
+   Cuando el entorno está activo, la consola muestra `(.venv)` al inicio de la línea.
+6. **Instalar la dependencia de las pruebas** dentro del entorno:
    ```
    python -m pip install -r requirements.txt
    ```
 
+### Por qué un entorno virtual
+El entorno virtual (`.venv`) es una carpeta dentro del proyecto con su propia copia de Python y sus propias bibliotecas. Así `pytest` se instala solo para este proyecto: no se mezcla con lo que ya tenga instalado el equipo donde se revisa y no cambia la versión de `pytest` de otros proyectos. El motor solo usa la biblioteca estándar, por lo que el entorno solo es necesario para ejecutar las pruebas; aun así se recomienda usarlo para todos los comandos.
+
+La carpeta `.venv` no se incluye en el ZIP ni en el repositorio (está en `.gitignore`), porque depende del equipo donde se crea; cada persona la crea con el paso 4.
+
+### Si PowerShell no permite activar el entorno
+Si al activar aparece un error que dice que la ejecución de scripts está deshabilitada, hay dos opciones que no requieren cambiar la configuración del equipo:
+- Abrir la consola con `cmd` (paso 2) y activar con `.venv\Scripts\activate`.
+- No activar el entorno y usar su Python directamente, anteponiendo `.venv\Scripts\` a cada comando. Por ejemplo:
+  ```
+  .venv\Scripts\python -m pip install -r requirements.txt
+  .venv\Scripts\python src/main.py
+  .venv\Scripts\python -m pytest -v
+  ```
+
 El repositorio también está disponible en GitHub: https://github.com/8alanct-hub/sistema_de_historias_interectativas
 
 ## Ejecución
-Siempre desde la carpeta descomprimida del proyecto:
+Siempre desde la carpeta descomprimida del proyecto y con el entorno virtual activado:
 
 | Qué | Comando |
 |---|---|
@@ -142,7 +170,7 @@ _(Enlace pendiente)_
 
 # Documentación
 
-Contenido de `docs/01_fundamentos.md` a `docs/09_trazabilidad.md`. Haga clic en cada título para desplegarlo. Las fuentes y herramientas de apoyo están en `docs/fuentes.md`.
+Contenido de `docs/01_fundamentos.md` a `docs/10_aportes.md`. Haga clic en cada título para desplegarlo. Las fuentes y herramientas de apoyo están en `docs/fuentes.md`.
 
 
 <details>
@@ -579,6 +607,32 @@ Cada requisito se relaciona con su origen, los modelos donde aparece, el código
 | RNF01 Claridad de errores | Voz de la coordinadora | Contexto; clase `ErrorDeContenido` | `cargador.py`; `modelo.py` | `test_u4_*` (16 casos con mensaje que identifica el ID o campo); `docs/resultado_pruebas.txt` |
 | RNF02 Facilidad de uso (interfaz en español) | Voces del cliente; supuesto 2 | Componentes (capa de interfaz) | `main.py` (todos los textos) | Revisión de los textos de la interfaz en el recorrido de los tres finales, una entrada inválida y un error de carga (ver "Verificación de los RNF") |
 | RNF03 Confiabilidad | Voz de la coordinadora | Secuencia; estados | `motor.py` → `elegir_por_numero()`; `main.py` → `main()` (captura de Ctrl + C y errores inesperados) | `test_u3_entrada_invalida_por_numero_deja_el_estado_intacto` (7 variantes); `test_u3_cero_sin_retroceso_disponible_es_invalido`; prueba manual en consola |
+
+</details>
+
+
+<details>
+<summary><b>10. Declaración de aportes</b></summary>
+
+**Integrante:** Alan Chiquillo Torres (entrega individual aprobada por el docente).
+
+El autor dirigió el trabajo: tomó las decisiones, propuso ideas y revisó y verificó todo lo producido. Comparó cada documento, diagrama y archivo de código con la guía del parcial antes de aprobarlo y subirlo. La redacción, el código y las pruebas se elaboraron con apoyo de IA, declarado fila por fila en `docs/fuentes.md`.
+
+| Tarea | Aporte del autor | Archivos | Commits |
+|---|---|---|---|
+| Organización y versionado | Creó el repositorio, el tablero Kanban con sus issues y responsables y las capturas del tablero. Hizo todos los commits y creó los tags `v1.0` y `v2.0`. | `docs/images/`, `docs/03_agilidad.md` | `f19bd2e` y siguientes |
+| Segunda historia | Idea y trama propias de "El último algoritmo"; cambio del protagonista a Darío y nueva redacción del final S3. | `data/segunda_historia.json` | `2517695` |
+| Fundamentos | Riesgos, priorización de los atributos de calidad, decisión sobre los datos del lector y uso del término "motor". | `docs/01_fundamentos.md` | `9d88603` |
+| Proceso y agilidad | Elección de Kanban, definición de terminado y aprendizaje. Corrigió el registro de aprendizajes. | `docs/02_proceso.md`, `docs/03_agilidad.md` | `f60607f` |
+| Requisitos | Planteó los RF, eligió los atributos de los RNF y propuso el supuesto 3 (entrada numérica) con su justificación. | `docs/04_requisitos.md` | `10cc46b`, `1e5ad14`, `050daff` |
+| Modelado | Decidió los actores de cada diagrama, el término "opciones", la clase `Partida`, la separación entre escena intermedia y final, los nombres de los métodos, el uso de snake_case, la validación dentro de la `Partida` y los estados de la partida. | `docs/05_modelado.md`, `docs/diagramas/` | `a26d9bb`, `a7f4ca9` |
+| Arquitectura | Eligió la arquitectura por capas, el módulo `modelo.py` separado y las decisiones 1 y 3. | `docs/06_arquitectura.md` | `a7f4ca9` |
+| Implementación | Revisó el código del modelo, el cargador, el motor y la interfaz; pidió que la consola se limpie entre escenas y comprobó las bibliotecas y sus licencias. | `src/`, `docs/07_implementacion.md` | `ec21577`, `50ec29b`, `2ca8d24` |
+| Pruebas | Revisó que cada caso de la guía (U1–U5, I1) tuviera entradas, resultado esperado y aserciones, y ejecutó las pruebas en su equipo. | `test/`, `docs/resultado_pruebas.txt` | `50bc184` |
+| Solicitud de cambio | Interpretó el retroceso como de un solo nivel, eligió dividir el cambio en RF14–RF18 atómicos y la opción 0 (supuesto 4). Propuso guardar el ID de la escena, que quedó documentado como alternativa considerada. | `docs/08_cambio.md`, `docs/04_requisitos.md` | `6ce430d`, `df5f560` |
+| README | Propuso incluir la documentación completa en secciones desplegables y corrigió la instalación para que sea desde el ZIP. | `docs/readme_base.md`, `README.md` | `8a79d73` |
+| Trazabilidad y verificación | Revisó la matriz, repitió en su consola la verificación de los RNF y tomó la captura (con la idea de desactivar temporalmente la limpieza de la consola). | `docs/09_trazabilidad.md`, `docs/images/verificacion_consola.png` | `0d0b49c`, `bfee105` |
+| Registro de fuentes | Revisó y corrigió `fuentes.md` para que distinga sus aportes de los de la IA. | `docs/fuentes.md` | En cada commit "Update fuentes" |
 
 </details>
 

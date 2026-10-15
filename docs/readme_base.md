@@ -6,7 +6,7 @@ Motor de consola que carga historias interactivas desde archivos JSON, valida su
 
 ## Versiones requeridas
 - Python 3.11 (probado con Python 3.11.9 en Windows)
-- pytest 8.3.3 (solo para ejecutar las pruebas)
+- pytest 8.3.3 (solo para ejecutar las pruebas; se instala dentro de un entorno virtual, ver Instalación)
 
 El motor solo usa la biblioteca estándar de Python (`json`, `sys`, `os`).
 
@@ -21,15 +21,43 @@ El proyecto se entrega en el archivo `Parcial_ChiquilloAlan.zip`. No requiere in
    python --version
    ```
    Si no está instalado, descargarlo desde python.org y marcar la opción *Add Python to PATH* durante la instalación.
-4. **Instalar la dependencia de las pruebas** (solo hace falta para ejecutar las pruebas, no para jugar):
+4. **Crear el entorno virtual** (solo la primera vez):
+   ```
+   python -m venv .venv
+   ```
+5. **Activar el entorno virtual** (cada vez que se abra una consola nueva):
+
+   | Consola | Comando |
+   |---|---|
+   | Símbolo del sistema (`cmd`) | `.venv\Scripts\activate` |
+   | PowerShell | `.venv\Scripts\Activate.ps1` |
+   | Mac o Linux | `source .venv/bin/activate` |
+
+   Cuando el entorno está activo, la consola muestra `(.venv)` al inicio de la línea.
+6. **Instalar la dependencia de las pruebas** dentro del entorno:
    ```
    python -m pip install -r requirements.txt
    ```
 
+### Por qué un entorno virtual
+El entorno virtual (`.venv`) es una carpeta dentro del proyecto con su propia copia de Python y sus propias bibliotecas. Así `pytest` se instala solo para este proyecto: no se mezcla con lo que ya tenga instalado el equipo donde se revisa y no cambia la versión de `pytest` de otros proyectos. El motor solo usa la biblioteca estándar, por lo que el entorno solo es necesario para ejecutar las pruebas; aun así se recomienda usarlo para todos los comandos.
+
+La carpeta `.venv` no se incluye en el ZIP ni en el repositorio (está en `.gitignore`), porque depende del equipo donde se crea; cada persona la crea con el paso 4.
+
+### Si PowerShell no permite activar el entorno
+Si al activar aparece un error que dice que la ejecución de scripts está deshabilitada, hay dos opciones que no requieren cambiar la configuración del equipo:
+- Abrir la consola con `cmd` (paso 2) y activar con `.venv\Scripts\activate`.
+- No activar el entorno y usar su Python directamente, anteponiendo `.venv\Scripts\` a cada comando. Por ejemplo:
+  ```
+  .venv\Scripts\python -m pip install -r requirements.txt
+  .venv\Scripts\python src/main.py
+  .venv\Scripts\python -m pytest -v
+  ```
+
 El repositorio también está disponible en GitHub: https://github.com/8alanct-hub/sistema_de_historias_interectativas
 
 ## Ejecución
-Siempre desde la carpeta descomprimida del proyecto:
+Siempre desde la carpeta descomprimida del proyecto y con el entorno virtual activado:
 
 | Qué | Comando |
 |---|---|
