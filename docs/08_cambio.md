@@ -33,6 +33,13 @@ El lector debe poder deshacer su última decisión, revirtiendo todas sus consec
 
 **Lectura del impacto:** el cambio solo afectó a `motor.py` y `main.py`. El modelo, el cargador y las historias no se tocaron, lo que confirma la decisión de separar el motor en capas (`06_arquitectura.md`).
 
+## Decisión de implementación
+La solicitud no exige una arquitectura o patrón específico. Se tomaron estas decisiones:
+
+- **Un solo respaldo en lugar de una lista de historial:** como el cliente pide un solo nivel de retroceso y no exige rehacer, basta con guardar el estado anterior a la última elección válida. Una lista agregaría complejidad que no se necesita.
+- **Las variables se guardan como copia:** el respaldo guarda `dict(self.variables)` y no una referencia, porque las variables cambian con cada elección. Sin la copia, deshacer devolvería los valores ya modificados.
+- **Alternativa considerada: guardar el ID de la escena en lugar del objeto.** Habría sido más coherente con el resto del motor, que se mueve por IDs (`destino`, `inicio`). Se mantuvo el objeto porque las escenas no cambian durante la partida (se crean una vez al cargar la historia) y ambas opciones se comportan igual.
+
 ## Evidencia de funcionamiento
 | Comportamiento | Prueba |
 |---|---|
