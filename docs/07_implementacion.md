@@ -17,4 +17,8 @@
 ## Bibliotecas y licencias
 | Biblioteca | Tipo | Licencia | Uso |
 |---|---|---|---|
-|  |  |  |  |
+| `json` | Biblioteca estándar de Python | PSF License | Leer los archivos de historia (`cargador.py`). |
+| `sys` | Biblioteca estándar de Python | PSF License | Leer la ruta de la historia indicada al ejecutar el programa y terminarlo con un código de salida (`main.py`). |
+| `os` | Biblioteca estándar de Python | PSF License | Limpiar la consola entre escenas, con `cls` en Windows y `clear` en Mac o Linux (`main.py`). |
+
+Las bibliotecas estándar vienen incluidas con Python, por lo que no requieren instalación adicional. El motor no depende de bibliotecas externas.
