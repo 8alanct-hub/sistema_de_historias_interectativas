@@ -1,1 +1,73 @@
-"""Motor: la Partida en curso (escena actual, variables y reglas del juego)."""
+"""Motor: la Partida en curso (escena actual, variables y reglas del juego).
+
+La Partida no conoce la consola ni los archivos: recibe una Historia ya validada
+y valida por sí misma todo lo que le envían (RF07, CA02).
+"""
+
+from modelo import EscenaFinal
+
+
+class Partida:
+    """Una partida de una historia: dónde está el lector y qué ha ocurrido."""
+
+    def __init__(self, historia):
+        self.historia = historia
+        self.escena_actual = None
+        self.variables = {}
+        self.reiniciar()
+
+    def reiniciar(self):
+        """Vuelve a la escena de inicio con las variables iniciales (RF02, RF10).
+
+        Se copian las variables para no conservar nada de la partida anterior.
+        """
+        self.escena_actual = self.historia.obtener_escena(self.historia.inicio)
+        self.variables = dict(self.historia.variables_iniciales)
+
+    def opciones_disponibles(self):
+        """Devuelve las opciones de la escena actual cuyas condiciones se cumplen (RF04)."""
+        return [
+            opcion
+            for opcion in self.escena_actual.opciones
+            if opcion.esta_habilitada(self.variables)
+        ]
+
+    def elegir_por_numero(self, entrada):
+        """Elige una opción a partir de lo que escribió el lector (supuesto 3).
+
+        La entrada debe ser el número con el que aparece la opción entre las
+        disponibles (1, 2, 3...). Si no lo es, devuelve False y la partida no cambia.
+        """
+        texto = str(entrada).strip()
+        if not texto.isdigit():
+            return False
+
+        numero = int(texto)
+        disponibles = self.opciones_disponibles()
+        if numero < 1 or numero > len(disponibles):
+            return False
+
+        return self.elegir_opcion(disponibles[numero - 1].id)
+
+    def elegir_opcion(self, id_opcion):
+        """Elige una opción por su id, aplica sus efectos y avanza (RF05, RF06).
+
+        Si la opción no existe en la escena actual o no está habilitada,
+        devuelve False y la partida no cambia (RF07, CA02).
+        """
+        for opcion in self.escena_actual.opciones:
+            if opcion.id == id_opcion:
+                if not opcion.esta_habilitada(self.variables):
+                    return False
+                self.variables.update(opcion.efectos)
+                self.escena_actual = self.historia.obtener_escena(opcion.destino)
+                return True
+        return False
+
+    def en_escena_final(self):
+        """Indica si la partida llegó a una escena final (RF09)."""
+        return isinstance(self.escena_actual, EscenaFinal)
+
+    def sin_opciones_disponibles(self):
+        """Indica si la escena actual no es final y no tiene opciones habilitadas (RF13)."""
+        return not self.en_escena_final() and len(self.opciones_disponibles()) == 0
